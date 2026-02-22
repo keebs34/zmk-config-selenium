@@ -246,3 +246,75 @@ include:
     cmake-args: >
       -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DHUMMINGBIRD"
       -DCONFIG_ZMK_STUDIO=y
+
+
+    # **** Glove80 ****
+    #
+    # Default config
+  - board: glove80_lh
+    artifact-name: glove80_default_left
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DCONFIG_ZMK_STUDIO=y
+  - board: glove80_rh
+    artifact-name: glove80_default_right
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DCONFIG_ZMK_STUDIO=y
+
+
+    # Ergo-L + Vim + hrm_shift config
+  - board: glove80_lh
+    artifact-name: glove80_ergol_vim_shift_left
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DVIM_NAVIGATION;-DHRM_SHIFT"
+      -DCONFIG_ZMK_STUDIO=y
+  - board: glove80_rh
+    artifact-name: glove80_ergol_vim_shift_right
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DVIM_NAVIGATION;-DHRM_SHIFT"
+      -DCONFIG_ZMK_STUDIO=y
+
+    # Ergo-L + Vim + 2tk config
+  - board: glove80_lh
+    artifact-name: glove80_ergol_2tk_left
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DVIM_NAVIGATION;-DHT_TWO_THUMB_KEYS"
+      -DCONFIG_ZMK_STUDIO=y
+  - board: glove80_rh
+    artifact-name: glove80_ergol_2tk_right
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DVIM_NAVIGATION;-DHT_TWO_THUMB_KEYS"
+      -DCONFIG_ZMK_STUDIO=y
+
+    # Azerty + thumb-taps config
+  - board: glove80_lh
+    artifact-name: glove80_azerty_tt_left
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_AZERTY;-DHT_THUMB_TAPS"
+      -DCONFIG_ZMK_STUDIO=y
+  - board: glove80_rh
+    artifact-name: glove80_azerty_tt_right
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_AZERTY;-DHT_THUMB_TAPS"
+      -DCONFIG_ZMK_STUDIO=y
+
+    # Ergo-L + Hummingbird config
+  - board: glove80_lh
+    artifact-name: glove80_ergol_hummingbird_left
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DHUMMINGBIRD"
+      -DCONFIG_ZMK_STUDIO=y
+  - board: glove80_rh
+    artifact-name: glove80_ergol_hummingbird_right
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DHUMMINGBIRD"
+      -DCONFIG_ZMK_STUDIO=y
