@@ -14,5 +14,8 @@ manifest:
     - name: zmk-keyboard-quacken
       remote: cfergeau
       revision: zmk-main
+    - name: zmk-config-totem
+      remote: cfergeau
+      revision: zmk-module
   self:
     path: config
