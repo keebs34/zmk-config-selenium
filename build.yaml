@@ -100,7 +100,6 @@ include:
     cmake-args: >
       -DCONFIG_ZMK_STUDIO=y
 
-
     # Ergo-L + Vim + hrm_shift config
   - board: xiao_ble//zmk
     shield: totem_left
@@ -182,7 +181,6 @@ include:
     cmake-args: >
       -DCONFIG_ZMK_STUDIO=y
 
-
     # Ergo-L + Vim + hrm_shift config
   - board: nice_nano@2//zmk
     shield: corne_left
@@ -248,6 +246,41 @@ include:
       -DCONFIG_ZMK_STUDIO=y
 
 
+    # **** Ferris ****
+    #
+    # Note: not enough memory for ZMK Studio or USB logging
+    # default config
+  - board: ferris//zmk
+    artifact-name: ferris
+
+    # Ergo-L + Vim
+  - board: ferris//zmk
+    artifact-name: ferris_ergol_vim
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DVIM_NAVIGATION"
+
+
+    # **** Sweep / Hypergolic / Cradio ****
+    #
+    # Note: Cradio is a firmware for a few 34 key keyboards,
+    # including Cradio, Hypergolic and Sweep.
+    # As the Sweep in the most famous keeb in the list,
+    # the artifact is named after it.
+    #
+    # default config
+  - board: sparkfun_pro_micro_rp2040//zmk
+    shield: cradio_left
+    artifact-name: sweep_pro_micro_left
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DCONFIG_ZMK_STUDIO=y
+  - board: sparkfun_pro_micro_rp2040//zmk
+    shield: cradio_right
+    artifact-name: sweep_pro_micro_right
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DCONFIG_ZMK_STUDIO=y
+
+
     # **** Glove80 ****
     #
     # Default config
@@ -261,7 +294,6 @@ include:
     snippet: studio-rpc-usb-uart
     cmake-args: >
       -DCONFIG_ZMK_STUDIO=y
-
 
     # Ergo-L + Vim + hrm_shift config
   - board: glove80_lh
