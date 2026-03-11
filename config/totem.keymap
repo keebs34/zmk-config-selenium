@@ -2,9 +2,49 @@
                         LOUT2,  LROW2,  RROW2,  ROUT2, \
                         LOUT3,  LROW3,  RROW3,  ROUT3, \
                         LT1, LT2, LT3,  RT3, RT2, RT1) \
+    SLN_LAYER_ ## name(name, LROW1,    RROW1,        \
+                             LROW2,    RROW2,        \
+                       LOUT3, LROW3,   RROW3, ROUT3, \
+                       LT1, LT2, LT3,  RT3, RT2, RT1)
+
+#define SLN_LAYER_Base(name,   LROW1,  RROW1,  \
+                               LROW2,  RROW2,  \
+                       LOUT3,  LROW3,  RROW3,  ROUT3, \
+                       LT1, LT2, LT3,  RT3, RT2, RT1) \
     ZMK_LAYER(name,       LROW1   RROW1       \
                           LROW2   RROW2       \
                     LOUT3 LROW3   RROW3 ROUT3 \
                     LT1 LT2 LT3   RT3 RT2 RT1)
+
+#define SLN_LAYER_NumLock SLN_LAYER_Base
+#define SLN_LAYER_Symbols SLN_LAYER_Base
+#define SLN_LAYER_NumNav SLN_LAYER_Base
+#define SLN_LAYER_Function SLN_LAYER_Base
+
+#define SLN_LAYER_VimNav(name, LROW1,  RROW1,  \
+                               LROW2,  RROW2,  \
+                       LOUT3,  LROW3,  RROW3,  ROUT3, \
+                       LT1, LT2, LT3,  RT3, RT2, RT1) \
+    ZMK_LAYER(name,         LROW1   RROW1       \
+                            LROW2   RROW2       \
+                      &kp A LROW3   RROW3 &kp B \
+                      LT1 LT2 LT3   RT3 RT2 RT1)
+
+#define SLN_LAYER_NumRow(name, LROW1,  RROW1,  \
+                               LROW2,  RROW2,  \
+                       LOUT3,  LROW3,  RROW3,  ROUT3, \
+                       LT1, LT2, LT3,  RT3, RT2, RT1) \
+    ZMK_LAYER(name,         LROW1   RROW1       \
+                            LROW2   RROW2       \
+                      &kp C LROW3   RROW3 &kp D \
+                      LT1 LT2 LT3   RT3 RT2 RT1)
+
+// azerty.dtsi
+#define SLN_LAYER_DeadKey SLN_LAYER_Base
+
+// ergol_hummingbird.dtsi
+#define SLN_LAYER_OneDeadKey SLN_LAYER_Base
+#define SLN_LAYER_ShiftedOneDeadKey SLN_LAYER_Base
+#define SLN_LAYER_ExtraSymbols SLN_LAYER_Base
 
 #include "../include/selenium/selenium.keymap"
