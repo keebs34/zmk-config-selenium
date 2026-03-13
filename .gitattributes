@@ -1,0 +1,8 @@
+# C is a good fallback for DTS files
+*.keymap linguist-language=c
+*.dtsi   linguist-language=c
+*.dts    linguist-language=c
+
+# INI is a decent fallback for conf/_defconfig files
+*.conf      linguist-language=ini
+*_defconfig linguist-language=ini
