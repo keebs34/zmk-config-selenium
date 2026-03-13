@@ -80,39 +80,22 @@
 ******************************************************************************/
 
 #include "aliases.h"      // defines symbols and actions
+#include "bindings.h"     // default SELENIUM_KEYMAP_BINDINGS macro
 #include "hold_taps.dtsi" // defines thumb keys and homerow mods
 
 /**
- * All keyboard layouts are defined on a 42-key basis, as follows:
+ * All keyboard layers are defined by blocks on a 42-key basis, as follows:
  *
- *   Tab   , QWERT , YUIOP , Backspace           LOUT1,  LROW1,  RROW1,  ROUT1
- *   Esc   , ASDFG , HJKL: , Enter        =>     LOUT2,  LROW2,  RROW2,  ROUT2
- *   Shift , ZXCVB , NM<>? , Shift               LOUT3,  LROW3,  RROW3,  ROUT3
- *    LT1, LT2, LT3, RT3, RT2, RT1               LT1, LT2, LT3,  RT3, RT2, RT1
+ *   <SELENIUM_KEYMAP_BINDINGS(
+ *     Tab   , QWERT , YUIOP , BkSpc ,
+ *     Esc   , ASDFG , HJKL: , Enter ,
+ *     Shift , ZXCVB , NM<>? , Shift ,
+ *      LT1, LT2, LT3, RT3, RT2, RT1
+ *   )>
  *
- * Where:
- *
- *   LROW[1-3], RROW[1-3]: keys on the left/right main rows (usually letter/punctuation keys)
- *   LOUT[1-3], ROUT[1-3]: keys on the left/right outer columns (usually special keys)
- *     LT[1-3],   RT[1-3]: keys on the left/right thumb clusters (usually Space or modifiers/layers)
- *
- * Beware: misplacing a comma in the definitions below would break the keymap.
+ * Where LTx/RTx are the left/right thumb keys.
+ * Beware: missing or misplacing a comma in the definitions below would break the keymap.
  */
-
-// This macro can be overridden in /config/*.keymap if needed.
-// Selenium by default only offers keymaps for 3x5 or 3x6 keyboards.
-// Redefining this macro allows to add more rows or more columns to the keymap,
-// or to add keys between the 2 halves if needed.
-#ifndef SELENIUM_KEYMAP_BINDINGS
-#define SELENIUM_KEYMAP_BINDINGS(LOUT1,  LROW1,  RROW1,  ROUT1, \
-                                 LOUT2,  LROW2,  RROW2,  ROUT2, \
-                                 LOUT3,  LROW3,  RROW3,  ROUT3, \
-                                 LT1, LT2, LT3,  RT3, RT2, RT1) \
-    LOUT1 LROW1 RROW1 ROUT1 \
-    LOUT2 LROW2 RROW2 ROUT2 \
-    LOUT3 LROW3 RROW3 ROUT3 \
-    LT1 LT2 LT3 RT3 RT2 RT1
-#endif
 
 / {
   keymap {
@@ -131,7 +114,7 @@
       )>;
     };
 
-    // 1. NumLock layer -- NavNum layer that stays on until deactivated without holding key
+    // 1. NumLock layer -- a NavNum layer that stays on until deactivated without holding any key
     num_lock_layer: num_lock_layer {
       display-name = "NumLock";
       bindings = <SELENIUM_KEYMAP_BINDINGS(
