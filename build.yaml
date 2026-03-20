@@ -256,6 +256,7 @@ include:
     # Ergo-L + Vim
   - board: ferris//zmk
     artifact-name: ferris_ergol_vim
+    cmake-args: >
       -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DVIM_NAVIGATION"
 
 
