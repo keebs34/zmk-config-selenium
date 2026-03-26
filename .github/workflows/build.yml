@@ -7,6 +7,9 @@ jobs:
       archive_name: firmware-selenium
   ci:
     name: "ci: Build test firmwares with various configuration options"
+    # Only run `ci` after `build` as `build-user-config.yml` does not seem
+    # to support concurrent runs
+    needs: build
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
     with:
       archive_name: firmware-tester-selenium
