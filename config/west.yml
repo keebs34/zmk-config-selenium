@@ -12,8 +12,8 @@ manifest:
       revision: main
       import: app/west.yml
     - name: zmk-keyboard-quacken
-      remote: cfergeau
-      revision: zmk-main
+      remote: NuclearSquid
+      revision: main
     - name: zmk-config-totem
       remote: cfergeau
       revision: zmk-module
