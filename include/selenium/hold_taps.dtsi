@@ -15,7 +15,7 @@
 #define VIM_NAV_LAYER   3
 #define NAV_NUM_LAYER   4
 #define NUM_ROW_LAYER   5
-#define FUN_MEDIA_LAYER 6
+#define FN_MEDIA_LAYER  6
 
 // Potentially used by other keymaps deriving from this one, who may add extra layers.
 // Make sure this stays equal to <index_of_last_layer> + 1
@@ -70,7 +70,7 @@
 #else
   #define NAV_LAYER NAV_NUM_LAYER
   #define NUM_LAYER NAV_NUM_LAYER
-  #define HRM_LAYER FUN_MEDIA_LAYER
+  #define HRM_LAYER FN_MEDIA_LAYER
   #define S34_LAYER NAV_NUM_LAYER
   #define REACH_TAP TAB
 #endif
