@@ -37,8 +37,26 @@ include:
     artifact-name: __tester_rp2040_bepolar_2tk
     cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_BEPOLAR;-DHT_TWO_THUMB_KEYS"
 
+  # Pro Micro RP2040, Dvorak
+  - board: sparkfun_pro_micro_rp2040//zmk
+    shield: corne_left
+    artifact-name: __tester_rp2040_dvorak
+    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_DVORAK;-DMACOS"
+
+  # Pro Micro RP2040, Erglace
+  - board: sparkfun_pro_micro_rp2040//zmk
+    shield: corne_left
+    artifact-name: __tester_rp2040_erglace
+    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_ERGLACE"
+
   # Pro Micro RP2040, Ergol + Hummingbird
   - board: sparkfun_pro_micro_rp2040//zmk
     shield: corne_left
     artifact-name: __tester_rp2040_ergol_hummingbird
     cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_ERGOL;-DHUMMINGBIRD"
+
+  # Pro Micro RP2040, Qwerty Lafayette + Left Hand Space
+  - board: sparkfun_pro_micro_rp2040//zmk
+    shield: corne_left
+    artifact-name: __tester_rp2040_qwerty_lafayette_lhs
+    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_QWERTY_LAFAYETTE;-DLEFT_HAND_SPACE"
