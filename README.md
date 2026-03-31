@@ -12,6 +12,31 @@ This repository also contains Selenium firmware builds for these keyboards:
 
 # Usage
 
+## Interactive firmware builder
+
+1. Fork `zmk-config-selenium`
+
+2. Build with GitHub Actions
+  - Open your fork in your browser: https://github.com/username/zmk-config-selenium
+  - Click on the *Actions* tab
+  - In the *All workflows* column to the left, choose "Build ZMK firmware with user config"
+  - Click on "Run workflow" on the right
+  - Select the options that you want
+  - Click on the green "Run workflow" button
+  - Wait for the build to complete
+  - Download the `firmware-selenium` artifact which appeared at the bottom of the *Summary* page
+
+3. Flash the firmware to your keyboard
+
+### Pros and cons
+
+- Relatively easy build of a firmware
+- Limited to a set of predefined keyboards
+- Need to set the options every time
+- Cannot build for multiple keyboards at once
+- Cannot tweak the keymap
+
+
 ## Customizing `zmk-config-selenium` firmwares
 
 `zmk-config-selenium` build firmwares for a number of keyboards with Selenium’s default options.

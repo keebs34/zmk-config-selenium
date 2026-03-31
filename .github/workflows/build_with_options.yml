@@ -1,0 +1,231 @@
+name: Build ZMK firmware with user configuration
+on:
+  workflow_dispatch:
+    inputs:
+      keyboard:
+        description: 'Keyboard Model'
+        required: true
+        default: ''
+        type: choice
+        options:
+        - Corne
+        - Ferris
+        - Glove80
+        - Quacken Flex
+        - Quacken Zero
+        - Sweep
+        - Totem
+      holdTaps:
+        description: 'Hold-Taps Mode'
+        required: true
+        default: 'HRM - Home-row mods'
+        type: choice
+        options:
+        - EZ - No Hold-taps
+        - TT - Thumb-taps
+        - HRM - Home-row mods
+        - 2TK - Two thumb keys
+      keyboardLayout:
+        description: 'Keyboard Layout'
+        required: true
+        default: 'Qwerty'
+        type: choice
+        options:
+        - Azerty
+        - Bépo
+        - Bépolar
+        - Dvorak
+        - Ergo-L
+        - Erglace
+        - Qwerty
+        - Qwerty-Lafayette
+      macPc:
+        description: 'Keyboard Type'
+        required: true
+        default: 'PC'
+        type: choice
+        options:
+        - mac
+        - PC
+      vimNav:
+        description: 'Vim Navigation'
+        required: false
+        type: boolean
+      hrmShift:
+        description: 'Shift as a pinky HRM'
+        required: false
+        type: boolean
+      zmkStudio:
+        description: 'Enable ZMK Studio'
+        required: false
+        default: true
+        type: boolean
+
+jobs:
+  generate_yaml:
+    name: "Generate ZMK custom-build.yml file from options"
+    outputs:
+      build_yaml_path: ${{ steps.generate_yaml.outputs.build_yaml_path }}
+    runs-on: ubuntu-latest
+    steps:
+      - id: generate_yaml
+        run: |
+          echo "Keyboard: $KBD"
+          echo "Hold Taps: $HOLD_TAPS"
+          echo "Keyboard Layout: $KB_LAYOUT"
+          echo "Keyboard Type: $MAC_PC"
+          echo "Vim Navigation: $VIM_NAV"
+          echo "HRM Shift: $HRM_SHIFT"
+          echo "ZMK Studio: $ZMK_STUDIO"
+
+          case $KBD in
+            Corne)
+              BOARD="nice_nano@2//zmk"
+              SHIELD="corne_left"
+              SHIELD_RIGHT="corne_right"
+            ;;
+            Ferris)
+              BOARD="ferris//zmk"
+            ;;
+            Glove80)
+              BOARD="glove80_lh"
+              BOARD_RIGHT="glove80_rh"
+            ;;
+            "Quacken Flex")
+              BOARD="quacken_flex/rp2040"
+            ;;
+            "Quacken Zero")
+              BOARD="sparkfun_pro_micro_rp2040//zmk"
+              SHIELD="quacken_zero"
+            ;;
+            Sweep)
+              BOARD="sparkfun_pro_micro_rp2040//zmk"
+              SHIELD="cradio_left"
+              SHIELD_RIGHT="cradio_right"
+            ;;
+            Totem)
+              BOARD="xiao_ble//zmk"
+              SHIELD="totem_left"
+              SHIELD_RIGHT="totem_right"
+            ;;
+          esac
+
+          COMPILE_FLAGS="-DIGNORE_USER_SETTINGS"
+
+          case $KB_LAYOUT in
+            Azerty)
+              COMPILE_FLAGS="$COMPILE_FLAGS;-DKB_LAYOUT_AZERTY"
+            ;;
+            Bépo)
+              COMPILE_FLAGS="$COMPILE_FLAGS;-DKB_LAYOUT_BEPO"
+            ;;
+            Bépolar)
+              COMPILE_FLAGS="$COMPILE_FLAGS;-DKB_LAYOUT_BEPOLAR"
+            ;;
+            Dvorak)
+              COMPILE_FLAGS="$COMPILE_FLAGS;-DKB_LAYOUT_DVORAK"
+            ;;
+            Ergo-L)
+              COMPILE_FLAGS="$COMPILE_FLAGS;-DKB_LAYOUT_ERGOL"
+            ;;
+            Erglace)
+              COMPILE_FLAGS="$COMPILE_FLAGS;-DKB_LAYOUT_ERGLACE"
+            ;;
+            Qwerty)
+              COMPILE_FLAGS="$COMPILE_FLAGS;-DKB_LAYOUT_QWERTY"
+            ;;
+            Qwerty-Lafayette)
+              COMPILE_FLAGS="$COMPILE_FLAGS;-DKB_LAYOUT_QWERTY_LAFAYETTE"
+            ;;
+          esac
+
+          case $HOLD_TAPS in
+            EZ*)
+              COMPILE_FLAGS="$COMPILE_FLAGS;-DHT_NONE"
+            ;;
+            TT*)
+              COMPILE_FLAGS="$COMPILE_FLAGS;-DHT_THUMB_TAPS"
+            ;;
+            HRM*) # default, nothing to do
+            ;;
+            2TK*)
+              COMPILE_FLAGS="$COMPILE_FLAGS;-DHT_TWO_THUMB_KEYS"
+            ;;
+          esac
+
+          if [ "$MAC_PC" == "mac" ]; then
+            COMPILE_FLAGS="$COMPILE_FLAGS;-DMACOS"
+          fi
+
+          if [ "$HRM_SHIFT" == "true" ]; then
+            COMPILE_FLAGS="$COMPILE_FLAGS;-DHRM_SHIFT";
+          fi
+
+          if [ "$VIM_NAV" == "true" ]; then
+            COMPILE_FLAGS="$COMPILE_FLAGS;-DVIM_NAVIGATION";
+          fi
+
+          COMPILE_FLAGS="-DDTS_EXTRA_CPPFLAGS=\"$COMPILE_FLAGS\""
+
+          if [ "$ZMK_STUDIO" == "true" ]; then
+            COMPILE_FLAGS="-DCONFIG_ZMK_STUDIO=y $COMPILE_FLAGS"
+          fi
+
+          echo "flags: $COMPILE_FLAGS"
+
+          yq -n '.include[0].board = "'$BOARD'"' >custom-build.yml
+          export COMPILE_FLAGS
+          yq -i '.include[0].cmake-args = strenv(COMPILE_FLAGS)' custom-build.yml
+          if [ "$SHIELD" != "" ]; then
+            yq -i '.include[0].shield = "'$SHIELD'"' custom-build.yml
+            yq -i '.include[0].artifact-name = "'$SHIELD'"' custom-build.yml;
+          else
+            yq -i '.include[0].artifact-name = "keyboard"' custom-build.yml;
+          fi
+
+          if [ "$ZMK_STUDIO" == "true" ]; then
+            yq -i '.include[0].snippet = "studio-rpc-usb-uart"' custom-build.yml;
+          fi
+
+          if [ "$BOARD_RIGHT" != "" -o "$SHIELD_RIGHT" != "" ]; then
+            if [ "$BOARD_RIGHT" != "" ]; then
+              yq -i '.include[1].board = "'$BOARD_RIGHT'"' custom-build.yml;
+            else
+              yq -i '.include[1].board = "'$BOARD'"' custom-build.yml;
+            fi
+            yq -i '.include[1].cmake-args = strenv(COMPILE_FLAGS)' custom-build.yml
+            if [ "$SHIELD_RIGHT" != "" ]; then
+              yq -i '.include[1].shield = "'$SHIELD_RIGHT'"' custom-build.yml
+              yq -i '.include[1].artifact-name = "'$SHIELD_RIGHT'"' custom-build.yml;
+            else
+              yq -i '.include[1].artifact-name = "keyboard"' custom-build.yml;
+            fi
+
+            if [ "$ZMK_STUDIO" == "true" ]; then
+              yq -i '.include[0].snippet = "studio-rpc-usb-uart"' custom-build.yml;
+            fi
+          fi
+          cat custom-build.yml
+          echo "build_yaml_path=$(pwd)/custom-build.yml" >> "$GITHUB_OUTPUT"
+        env:
+          KBD: ${{ inputs.Keyboard }}
+          HOLD_TAPS: ${{ inputs.holdTaps }}
+          KB_LAYOUT: ${{ inputs.keyboardLayout }}
+          MAC_PC: ${{ inputs.macPc }}
+          VIM_NAV: ${{ inputs.vimNav }}
+          HRM_SHIFT: ${{ inputs.hrmShift }}
+          ZMK_STUDIO: ${{ inputs.zmkStudio }}
+      - id: upload_yaml
+        uses: actions/upload-artifact@v6
+        with:
+          path: custom-build.yml
+          name: build-matrix
+
+  build_with_options:
+    name: "Build ZMK firmware"
+    needs: generate_yaml
+    uses: ./.github/workflows/zmk-build-user-config.yml
+    with:
+      archive_name: firmware-selenium
+      matrix_artifact_name: build-matrix
+      build_matrix_path: custom-build.yml
