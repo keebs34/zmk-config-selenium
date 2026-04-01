@@ -1,7 +1,14 @@
-# This file describes the firmwares that are built by the GitHub Actions CI.
-#  - all supported keebs have a dedicated firmware implementing `selenium.keymap`
+# This file describes the keyboard firmwares that are built with automatically
+# with the options defined in `selenium.keymap`
+#
+# - rename this file to my_keyboards.yaml: `git mv my_keyboards.yaml.sample my_keyboards.yaml`
+# - add one keymap for each keyboard in `config/`
+# - add any needed zmk module in `config/west.yml`
+# - commit and push
+# - the build_my_keyboards github actions workflow will build these firmwares
 
 include:
+  ## TODO: only keep a few simple keyboard definitions in there
 
   ###
   # ProMicro-Based Keyboards

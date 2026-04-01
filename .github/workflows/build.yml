@@ -1,4 +1,4 @@
-on: [push, pull_request, workflow_dispatch]
+on: [push, pull_request]
 
 jobs:
   ci:
@@ -7,10 +7,3 @@ jobs:
     with:
       archive_name: firmware-tester-selenium
       build_matrix_path: ci.yaml
-  build:
-    # Only run `build` after `ci` as `build-user-config.yml` does not seem
-    # to support concurrent runs
-    needs: ci
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
-    with:
-      archive_name: firmware-selenium

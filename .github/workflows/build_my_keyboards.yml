@@ -1,0 +1,28 @@
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  check_my_keyboards_yaml:
+    name: Check if my_keyboards.yaml exists
+    runs-on: ubuntu-latest
+    outputs:
+      exists: ${{ steps.check_exists.outputs.exists }}
+    steps:
+      - uses: actions/checkout@v6
+      - id: check_exists
+        run: |
+          if [ -f my_keyboards.yaml ]; then echo "exists=1" >> "$GITHUB_OUTPUT"; fi
+
+  build_my_keyboards:
+    needs: check_my_keyboards_yaml
+    # only trigger this job if the user created a `my_keyboards.yaml` file
+    if: ${{ needs.check_my_keyboards_yaml.outputs.exists == 1 }}
+    name: Build user-defined keyboard firmwares
+    #steps:
+    #  - id: debug
+    #    env:
+    #      EXISTS: ${{needs.check_my_keyboards_yaml.outputs.exists}}
+    #    run: echo "exists $EXISTS"
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      archive_name: firmware-my-keyboards
+      build_matrix_path: my_keyboards.yaml
