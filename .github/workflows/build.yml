@@ -7,6 +7,7 @@ jobs:
       archive_name: firmware-selenium
   ci:
     name: "ci: Build test firmwares with various configuration options"
+    if: github.event_name == 'workflow_dispatch' || vars.RUN_CI == 1
     # Only run `ci` after `build` as `build-user-config.yml` does not seem
     # to support concurrent runs
     needs: build
