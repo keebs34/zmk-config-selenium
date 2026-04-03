@@ -1,7 +1,7 @@
 // Selenium keymap:
 // https://github.com/OneDeadKey/selenium
 
-#ifndef CI_IGNORE_USER_SETTINGS
+#ifndef IGNORE_USER_SETTINGS
   #include "settings.h"   // user settings
 #endif
 

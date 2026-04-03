@@ -6,75 +6,75 @@ include:
   - board: sparkfun_pro_micro_rp2040//zmk
     shield: corne_left
     artifact-name: tester_rp2040
-    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS"
+    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DIGNORE_USER_SETTINGS"
 
   # Qwerty + Vim + hrm_shift
   - board: sparkfun_pro_micro_rp2040//zmk
     shield: corne_left
     artifact-name: tester_rp2040_qwerty_vim_shift
-    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DVIM_NAVIGATION;-DHRM_SHIFT"
+    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DIGNORE_USER_SETTINGS;-DVIM_NAVIGATION;-DHRM_SHIFT"
 
   # Azerty + thumb-taps
   - board: sparkfun_pro_micro_rp2040//zmk
     shield: corne_left
     artifact-name: tester_rp2040_azerty_tt
-    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_AZERTY;-DHT_THUMB_TAPS"
+    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DIGNORE_USER_SETTINGS;-DKB_LAYOUT_AZERTY;-DHT_THUMB_TAPS"
 
   # Bepo + HT_NONE
   - board: sparkfun_pro_micro_rp2040//zmk
     shield: corne_left
     artifact-name: tester_rp2040_bepo_ez
-    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_BEPO;-DHT_NONE"
+    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DIGNORE_USER_SETTINGS;-DKB_LAYOUT_BEPO;-DHT_NONE"
 
   # Bepolar + HT_TWO_THUMB_KEYS
   - board: sparkfun_pro_micro_rp2040//zmk
     shield: corne_left
     artifact-name: tester_rp2040_bepolar_2tk
-    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_BEPOLAR;-DHT_TWO_THUMB_KEYS"
+    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DIGNORE_USER_SETTINGS;-DKB_LAYOUT_BEPOLAR;-DHT_TWO_THUMB_KEYS"
 
   # Dvorak
   - board: sparkfun_pro_micro_rp2040//zmk
     shield: corne_left
     artifact-name: tester_rp2040_dvorak
-    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_DVORAK;-DMACOS"
+    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DIGNORE_USER_SETTINGS;-DKB_LAYOUT_DVORAK;-DMACOS"
 
   # Erglace
   - board: sparkfun_pro_micro_rp2040//zmk
     shield: corne_left
     artifact-name: tester_rp2040_erglace
-    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_ERGLACE"
+    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DIGNORE_USER_SETTINGS;-DKB_LAYOUT_ERGLACE"
 
   # Ergol + Hummingbird
   - board: sparkfun_pro_micro_rp2040//zmk
     shield: corne_left
     artifact-name: tester_rp2040_ergol_hummingbird
-    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_ERGOL;-DHUMMINGBIRD"
+    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DIGNORE_USER_SETTINGS;-DKB_LAYOUT_ERGOL;-DHUMMINGBIRD"
 
   # Qwerty Lafayette + Left Hand Space
   - board: sparkfun_pro_micro_rp2040//zmk
     shield: corne_left
     artifact-name: tester_rp2040_qwerty_lafayette_lhs
-    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_QWERTY_LAFAYETTE;-DLEFT_HAND_SPACE"
+    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DIGNORE_USER_SETTINGS;-DKB_LAYOUT_QWERTY_LAFAYETTE;-DLEFT_HAND_SPACE"
 
   # Ensure the Ferris applies 2TK even when HRM is requested
   - board: ferris//zmk
     artifact-name: ferris_hrm
-    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DHT_HOME_ROW_MODS"
+    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DIGNORE_USER_SETTINGS;-DHT_HOME_ROW_MODS"
 
   # Dvorak emulation on Qwerty
   - board: sparkfun_pro_micro_rp2040//zmk
     shield: corne_left
     artifact-name: tester_qwerty_to_dvorak
-    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_QWERTY;-DKB_EMULATION_DVORAK"
+    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DIGNORE_USER_SETTINGS;-DKB_LAYOUT_QWERTY;-DKB_EMULATION_DVORAK"
 
   # Ergol emulation on Azerty
   - board: sparkfun_pro_micro_rp2040//zmk
     shield: corne_left
     artifact-name: tester_azerty_to_ergol
-    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_AZERTY;-DKB_EMULATION_ERGOL"
+    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DIGNORE_USER_SETTINGS;-DKB_LAYOUT_AZERTY;-DKB_EMULATION_ERGOL"
 
   # Ergol emulation on Qwerty-intl
   - board: sparkfun_pro_micro_rp2040//zmk
     shield: corne_left
     artifact-name: tester_qwerty_intl_to_ergol
-    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_QWERTY_INTL;-DKB_EMULATION_ERGOL"
+    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DIGNORE_USER_SETTINGS;-DKB_LAYOUT_QWERTY_INTL;-DKB_EMULATION_ERGOL"
