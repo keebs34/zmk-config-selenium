@@ -54,14 +54,14 @@ In your ZMK project, edit `config/west.yml` and add to the `manifest/remotes` se
 ```
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: OneDeadKey
-      url-base: https://github.com/OneDeadKey
+    - name: keebs34
+      url-base: https://github.com/keebs34
 ```
 
 Add to the `manifest/projects` section:
 ```
     - name: zmk-config-selenium
-      remote: OneDeadKey
+      remote: keebs34
       revision: main
 ```
 
