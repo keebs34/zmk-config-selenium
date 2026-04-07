@@ -8,7 +8,7 @@ This repository also contains Selenium firmware builds for these keyboards:
 - [Glove80](https://www.moergo.com/)
 - [Quacken](https://github.com/Nuclear-Squid/Quacken)
 - [Sweep](https://github.com/davidphilipbarr/Sweep)
-- [Totem](https://github.com/GEIGEIGEIST/TOTEM)
+- [TOTEM](https://github.com/GEIGEIGEIST/TOTEM)
 
 # Usage
 
@@ -43,7 +43,7 @@ You will only need 2 things in this file:
 - a `#include "../zmk-config-selenium/include/selenium/selenium.keymap"` line at the very end of the file
 - optionally, you can `#define` some of the options documented in [`selenium.keymap`](include/selenium/selenium.keymap)
 
-See the [Totem](config/totem.keymap) or the [Glove80](config/glove80.keymap) keymaps for some examples.
+See the [TOTEM](config/totem.keymap) or the [Glove80](config/glove80.keymap) keymaps for some examples.
 Do not copy the `#include` line from these example, a different path is needed
 when building with `zmk-config-selenium` as an external module.
 
