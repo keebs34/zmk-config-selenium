@@ -2,78 +2,7 @@
 // https://github.com/OneDeadKey/selenium
 
 #ifndef CI_IGNORE_USER_SETTINGS
-/******************************************************************************
- * Layout-specific actions and symbols.
-******************************************************************************/
-
-// Uncomment one of the folowing lines if using a non-QWERTY layout:
-
-// #define KB_LAYOUT_QWERTY_LAFAYETTE
-// #define KB_LAYOUT_AZERTY
-// #define KB_LAYOUT_ERGOL
-
-// Uncomment the folowing line if using a Mac:
-
-// #define MACOS
-
-
-/******************************************************************************
- * Hold-Taps
-******************************************************************************/
-
-// Uncomment one of the folowing lines to pick your preferred hold-tap config:
-
-// #define HT_NONE
-// #define HT_THUMB_TAPS
-// #define HT_HOME_ROW_MODS  // (default behavior)
-// #define HT_TWO_THUMB_KEYS
-
-// Timing is key! Keep the default value if unsure.
-// This defines how long (in ms) a hold-tap key with the "tap-preferred" flavor
-// must be held to be considered as a modifier or layer shift. These hold-taps
-// are the ones that may produce text, including the space-bar and home-row-mods.
-// Keep this value high if you struggle wih home-row-mods.
-
-// #define TAPPING_TERM 300
-
-// This defines how quickly (in ms) you need to press and release a hold-tap
-// with the "hold-preferred" flavor for it to be considered a tap. These
-// hold-taps include the ones that don’t produce text when tapped.
-// Keep this value low if you press Enter or Escape by mistake too often.
-
-// #define SHORT_TAPPING_TERM 150
-
-// When tapping then holding the same tap-hold, if the delay between the two
-// key presses is lower than `QUICK_TAP`, the tap-hold will hold the tap action
-// instead of the hold action. Again, keep the default value if unsure.
-
-// #define QUICK_TAP 200
-
-// For more information on how hold-taps operate, feel free to read ZMK’s docs:
-// https://zmk.dev/docs/keymaps/behaviors/hold-tap
-
-/******************************************************************************
- * Other Options
-*****************************************************************************/
-
-// Uncomment the following line to plit the num-nav layer in two:
-//  - one layer for vim-style navigation (right) and GUI shortcuts (left)
-//  - one layer for a full number row + easy access to Shift+Number
-//  + Escape under the left thumb (direct access)
-// Highly recommended for Vim users, obviously. :-)
-
-// #define VIM_NAVIGATION
-
-// Uncomment the following line to enable shift as a pinky HRM.
-// Useful for combined shortcuts, but NOT MEANT to type text!
-
-// #define HRM_SHIFT
-
-// Uncomment the following line to swap Space and Backspace.
-// Beware: this increases the typing load of the left thumb.
-
-// #define LEFT_HAND_SPACE
-
+  #include "settings.h"
 #endif /* CI_IGNORE_USER_SETTINGS */
 
 
@@ -83,6 +12,7 @@
 
 #include "aliases.h"      // defines symbols and actions
 #include "bindings.h"     // default SELENIUM_KEYMAP_BINDINGS macro
+#include "dead_keys.dtsi" // defines dead key helpers
 #include "hold_taps.dtsi" // defines thumb keys and homerow mods
 
 /**
@@ -127,7 +57,7 @@
       )>;
     };
 
-    // 2. Symbols layer -- with Ergol, basically just an AltGr layer with custom thumb keys
+    // 2. Symbols layer -- with Ergo-L, basically just an AltGr layer with custom thumb keys
     //                  -- can be redefined for non-AltGr layouts such as QWERTY-ANSI
     symbols_layer: symbols_layer {
       display-name = "Symbols";
@@ -141,11 +71,11 @@
 
     // 3. VimNav layer -- HJKL arrow cluster on the right hand
     //                 -- best used along with the NumRow layer
-    //                 -- keyboard shortcuts on the left hand are adjusted to the OS layout (Ergol here)
+    //                 -- keyboard shortcuts on the left hand are adjusted to the OS layout (Ergo-L here)
     vim_nav_layer: vim_nav_layer {
       display-name = "VimNav";
       bindings = <SELENIUM_KEYMAP_BINDINGS(
-        &trans  ,  &none    X_CLOSE  X_PREV   X_NEXT    &none     ,   &kp HOME &kp PG_DN &kp PG_UP &kp END   &kp DEL ,  &trans ,
+        &trans  ,  &none    X_CTL_W  X_PREV   X_NEXT    &none     ,   &kp HOME &kp PG_DN &kp PG_UP &kp END   &kp DEL ,  &trans ,
         &trans  ,  X_ALL    X_SAVE   X_SHTAB  &kp TAB   &none     ,   &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none   ,  &trans ,
         &trans  ,  X_UNDO   X_CUT    X_COPY   X_PASTE   X_REDO    ,   &none    &none     &none     &none     &none   ,  &trans ,
            &kp CAPS , &lt FN_MEDIA_LAYER DEL , &mo NUM_ROW_LAYER  ,   &trans ,  &mo FN_MEDIA_LAYER , &EZ_LSK(RALT)
@@ -154,7 +84,7 @@
 
     // 4. NavNum layer -- inverted T arrow cluster on the left hand, numpad on the right hand
     //                 -- can be the only extra layer you need if you're not too picky with number+symbols n-grams
-    //                 -- keyboard shortcuts on the left hand are adjusted to the OS layout (Ergol here)
+    //                 -- keyboard shortcuts on the left hand are adjusted to the OS layout (Ergo-L here)
     nav_num_layer: nav_num_layer {
       display-name = "NavNum";
       bindings = <SELENIUM_KEYMAP_BINDINGS(
@@ -166,7 +96,7 @@
     };
 
     // 5. NumRow layer -- bring the numbers to the homerow, keep shift+numbers for shortcuts and symbols
-    //                 -- space becomes shift+space, which is a no-break space with some OS layouts (e.g. Ergol)
+    //                 -- space becomes shift+space, which is a no-break space with some OS layouts (e.g. Ergo-L)
     //                 -- best used along with the VimNav layer
     num_row_layer: num_row_layer {
       display-name = "NumRow";
@@ -184,9 +114,9 @@
     fn_media_layer: fn_media_layer {
       display-name = "FnMedia";
       bindings = <SELENIUM_KEYMAP_BINDINGS(
-        &trans  ,  &kp F1  &kp F2  &kp F3  &kp F4  &none   ,   &none &kp C_PREV     &kp C_VOL_UP     &kp C_BRI_UP        &kp SLCK           ,  &trans ,
-        &trans  ,  &kp F5  &kp F6  &kp F7  &kp F8  &none   ,   &none &hrm LALT C_PP &hrm RCTL C_MUTE &hrm RGUI C_AL_LOCK &hrm LSHIFT PSCRN  ,  &trans ,
-        &trans  ,  &kp F9  &kp F10 &kp F11 &kp F12 &none   ,   &none &kp C_NEXT     &kp C_VOL_DN     &kp C_BRI_DN        &kp INS            ,  &trans ,
+        &trans  ,  &kp F1  &kp F2  &kp F3  &kp F4  &none   ,   &none  &kp C_PREV  &kp C_VOL_UP  &kp C_BRI_UP   &kp SLCK     ,  &trans ,
+        &trans  ,  &kp F5  &kp F6  &kp F7  &kp F8  &none   ,   &none  H_J C_PP    H_K C_MUTE    H_L C_AL_LOCK  H_SEMI PSCRN ,  &trans ,
+        &trans  ,  &kp F9  &kp F10 &kp F11 &kp F12 &none   ,   &none  &kp C_NEXT  &kp C_VOL_DN  &kp C_BRI_DN   &kp INS      ,  &trans ,
                            &trans , &trans , &bootloader   ,   &sys_reset , &trans , &studio_unlock
       )>;
     };
@@ -194,9 +124,17 @@
   };
 };
 
+// Emulated layouts (experimental!)
+#ifdef KB_EMULATION_DVORAK
+  #include "emulations/dvorak.dtsi"
+#elif defined KB_EMULATION_ERGOL
+  #include "emulations/ergol.dtsi"
+
 // Some layouts require extra layers to fit on the Quacken.
-#ifdef KB_LAYOUT_AZERTY
+#elif defined KB_LAYOUT_AZERTY
   #include "extra_layers/azerty.dtsi"
+#elif defined KB_LAYOUT_BEPO
+  #include "extra_layers/bepo.dtsi"
 #elif defined KB_LAYOUT_ERGOL && defined HUMMINGBIRD
   #include "extra_layers/ergol_hummingbird.dtsi"
 #endif

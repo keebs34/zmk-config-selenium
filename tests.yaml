@@ -25,6 +25,18 @@ include:
     artifact-name: __tester_rp2040_azerty_tt
     cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_AZERTY;-DHT_THUMB_TAPS"
 
+  # Pro Micro RP2040, Bepo + HT_NONE
+  - board: sparkfun_pro_micro_rp2040//zmk
+    shield: corne_left
+    artifact-name: __tester_rp2040_bepo_ez
+    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_BEPO;-DHT_NONE"
+
+  # Pro Micro RP2040, Bepolar + HT_TWO_THUMB_KEYS
+  - board: sparkfun_pro_micro_rp2040//zmk
+    shield: corne_left
+    artifact-name: __tester_rp2040_bepolar_2tk
+    cmake-args: -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_BEPOLAR;-DHT_TWO_THUMB_KEYS"
+
   # Pro Micro RP2040, Ergol + Hummingbird
   - board: sparkfun_pro_micro_rp2040//zmk
     shield: corne_left
