@@ -9,13 +9,13 @@
 
 // Human-readable constants for the layer indexes.
 // Make sure to update this table if you edit the order / number of layers in the keymap.
-#define BASE_LAYER      0
-#define NUM_LOCK_LAYER  1
-#define SYMBOLS_LAYER   2
-#define VIM_NAV_LAYER   3
-#define NAV_NUM_LAYER   4
-#define NUM_ROW_LAYER   5
-#define FN_MEDIA_LAYER  6
+#define BASE_LAYER     0
+#define NUM_LOCK_LAYER 1
+#define SYMBOLS_LAYER  2
+#define VIM_NAV_LAYER  3
+#define NAV_NUM_LAYER  4
+#define NUM_ROW_LAYER  5
+#define FN_MEDIA_LAYER 6
 
 // Potentially used by other keymaps deriving from this one, who may add extra layers.
 // Make sure this stays equal to <index_of_last_layer> + 1
@@ -32,9 +32,9 @@
   #undef HT_HOME_ROW_MODS
   #define HT_TWO_THUMB_KEYS
 #elif !defined HT_NONE && !defined HT_THUMB_TAPS && !defined HT_HOME_ROW_MODS && !defined HT_TWO_THUMB_KEYS
-#define HT_HOME_ROW_MODS
+  #define HT_HOME_ROW_MODS
 #elif defined HT_NONE + defined HT_THUMB_TAPS + defined HT_HOME_ROW_MODS + defined HT_TWO_THUMB_KEYS > 1
-#error "Please select only up to one hold-tap configuration at a time"
+  #error "Please select only up to one hold-tap configuration at a time"
 #endif
 
 #if defined MACOS

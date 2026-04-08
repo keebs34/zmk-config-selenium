@@ -24,7 +24,6 @@
   )>;
 };
 
-
 / {
   behaviors {
     // Swap out the standard dead key for a one-shot layer to override some of the keys
