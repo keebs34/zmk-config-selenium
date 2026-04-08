@@ -128,5 +128,5 @@ your keyboard should be build automatically in GitHub Actions!
 You can contribute the integration of your new keyboard to
 `zmk-config-selenium` so that others can also benefit from it.
 
-[File a pull request](https://github.com/OneDeadKey/zmk-config-selenium/compare)
+[File a pull request](https://github.com/keebs34/zmk-config-selenium/compare)
 with the `build.yaml` changes and the keymap definition without any options set.
