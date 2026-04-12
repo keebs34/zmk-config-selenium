@@ -117,6 +117,26 @@ Once the firmware is built, it should be using [Selenium](https://onedeadkey.git
 - Cannot tweak the keymap
 
 
+## Local build
+
+1. Install `just`, `jq` and the Python implementation of `yq`
+
+2. Run `just init` (only needed the first time)
+
+3. Run `just build all`. You can also use `just build totem` or any keyboard name to build only for this keyboard
+
+4. If your keyboard is missing from `build.yaml`, follow the steps from [this section](#adding-a-new-keyboard-to-zmk-config-selenium).
+
+5. The built firmwares will be in the `firmware` directory
+
+### Pros and cons
+- Need local build setup, which may be easier said than done
+- Faster than building on GitHub Actions
+- Can build for multiple keyboards at once
+- Can use different `zmk-config-selenium` options for different keyboards if needed
+- Can tweak the keymap
+
+
 # Adding a new keyboard to `zmk-config-selenium`
 
 1. Fork `zmk-config-selenium`
