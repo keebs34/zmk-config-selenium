@@ -22,7 +22,7 @@ include:
     shield: quacken_zero
     artifact-name: quacken_zero
     snippet: studio-rpc-usb-uart
-    cmake-args: >
+    cmake-args: >-
       -DCONFIG_ZMK_STUDIO=y
 
   # Totem + XIAO BLE
@@ -30,13 +30,13 @@ include:
     shield: totem_left
     artifact-name: totem_left
     snippet: studio-rpc-usb-uart
-    cmake-args: >
+    cmake-args: >-
       -DCONFIG_ZMK_STUDIO=y
   - board: xiao_ble//zmk
     shield: totem_right
     artifact-name: totem_right
     snippet: studio-rpc-usb-uart
-    cmake-args: >
+    cmake-args: >-
       -DCONFIG_ZMK_STUDIO=y
 
   # Corne + nice!nano v2
@@ -44,13 +44,13 @@ include:
     shield: corne_left
     artifact-name: corne_left
     snippet: studio-rpc-usb-uart
-    cmake-args: >
+    cmake-args: >-
       -DCONFIG_ZMK_STUDIO=y
   - board: nice_nano@2//zmk
     shield: corne_right
     artifact-name: corne_right
     snippet: studio-rpc-usb-uart
-    cmake-args: >
+    cmake-args: >-
       -DCONFIG_ZMK_STUDIO=y
 
   # Sweep + SparkFun RP2040
@@ -58,13 +58,13 @@ include:
     shield: cradio_left
     artifact-name: sweep_left
     snippet: studio-rpc-usb-uart
-    cmake-args: >
+    cmake-args: >-
       -DCONFIG_ZMK_STUDIO=y
   - board: sparkfun_pro_micro_rp2040//zmk
     shield: cradio_right
     artifact-name: sweep_right
     snippet: studio-rpc-usb-uart
-    cmake-args: >
+    cmake-args: >-
       -DCONFIG_ZMK_STUDIO=y
 
 
@@ -76,7 +76,7 @@ include:
   - board: quacken_flex/rp2040
     artifact-name: quacken_flex
     snippet: studio-rpc-usb-uart
-    cmake-args: >
+    cmake-args: >-
       -DCONFIG_ZMK_STUDIO=y
 
   # Ferris (STM32F072)
@@ -88,10 +88,10 @@ include:
   - board: glove80_lh
     artifact-name: glove80_left
     snippet: studio-rpc-usb-uart
-    cmake-args: >
+    cmake-args: >-
       -DCONFIG_ZMK_STUDIO=y
   - board: glove80_rh
     artifact-name: glove80_right
     snippet: studio-rpc-usb-uart
-    cmake-args: >
+    cmake-args: >-
       -DCONFIG_ZMK_STUDIO=y

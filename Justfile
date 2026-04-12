@@ -16,7 +16,7 @@ _parse_targets $expr matrix-file=default_build_matrix:
     #!/usr/bin/env bash
     attrs="[.board, .shield, .snippet, .\"artifact-name\", .\"cmake-args\"]"
     filter="(($attrs | map(. // [.]) | combinations), ((.include // {})[] | $attrs)) | join(\",\")"
-    echo "$(yq -r "$filter" {{matrix-file}} | grep -v "^," | grep -v "^$" | grep -i "${expr/#all/.*}")"
+    echo "$(yq -r "$filter" {{matrix-file}} | grep -v "^," | grep -i "${expr/#all/.*}")"
 
 # build firmware for single board & shield combination
 _build_single $board $shield $snippet $artifact cmake_args *west_args:
