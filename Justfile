@@ -1,5 +1,3 @@
-# this Justfile requires python-yq, not golang-yq
-# the latter will fail with an error about `combinations` (used in `_parse_targets`)
 default:
     @just --list --unsorted
 
@@ -8,21 +6,20 @@ build := absolute_path('.build')
 out := absolute_path('firmware')
 draw := absolute_path('draw')
 
-default_build_matrix := "build.yaml"
+build_matrix := "build.yaml"
 
 # parse build.yaml and filter targets by expression
-[arg("matrix-file", short="f", long="matrix-file")]
-_parse_targets $expr matrix-file=default_build_matrix:
+_parse_targets $expr: _check_yq_version
     #!/usr/bin/env bash
     attrs="[.board, .shield, .snippet, .\"artifact-name\", .\"cmake-args\"]"
     filter="(($attrs | map(. // [.]) | combinations), ((.include // {})[] | $attrs)) | join(\",\")"
-    echo "$(yq -r "$filter" {{matrix-file}} | grep -v "^," | grep -i "${expr/#all/.*}")"
+    echo "$(yq -r "$filter" {{build_matrix}} | grep -v "^," | grep -i "${expr/#all/.*}")"
 
 # build firmware for single board & shield combination
 _build_single $board $shield $snippet $artifact cmake_args *west_args:
     #!/usr/bin/env bash
     set -euo pipefail
-    artifact="${artifact:-${shield:+${shield// /+}-}${board%%/*}}"
+    artifact="${artifact:-${shield:+${shield// /+}-}${board//\//_}}"
     build_dir="{{ build / '$artifact' }}"
 
     echo "Building firmware for $artifact..."
@@ -36,11 +33,10 @@ _build_single $board $shield $snippet $artifact cmake_args *west_args:
     fi
 
 # build firmware for matching targets
-[arg("matrix-file", short="f", long="matrix-file")]
-build expr matrix-file=default_build_matrix *west_args:
+build expr *west_args:
     #!/usr/bin/env bash
     set -euo pipefail
-    targets=$(just _parse_targets --matrix-file={{ matrix-file }} {{ expr }})
+    targets=$(just build_matrix={{build_matrix}} _parse_targets {{ expr }})
 
     [[ -z $targets ]] && echo "No matching targets found. Aborting..." >&2 && exit 1
     echo "$targets" | while IFS=, read -r board shield snippet artifact cmake_args; do
@@ -60,7 +56,7 @@ clean-nix:
     nix-collect-garbage --delete-old
 
 # parse & plot keymap
-draw:
+draw: _check_yq_version
     #!/usr/bin/env bash
     set -euo pipefail
     keymap -c "{{ draw }}/config.yaml" parse -z "{{ config }}/base.keymap" --virtual-layers Combos >"{{ draw }}/base.yaml"
@@ -74,9 +70,8 @@ init:
     west zephyr-export
 
 # list build targets
-[arg("matrix-file", short="f", long="matrix-file")]
-list matrix-file=default_build_matrix:
-    @just _parse_targets --matrix-file={{matrix-file}} all | sed 's/,*,[^,]*$//' | sort | column
+list:
+    @just build_matrix={{build_matrix}} _parse_targets all | sed 's/,*,[^,]*$//' | sort | column
 
 # update west
 update:
@@ -85,6 +80,16 @@ update:
 # upgrade zephyr-sdk and python dependencies
 upgrade-sdk:
     nix flake update --flake .
+
+# warn user if they are using golang-yq and not python-yq
+[no-exit-message]
+_check_yq_version:
+    #!/usr/bin/env bash
+    if yq --help 2>&1 | grep -qi 'eval'; then
+        echo "This script requires python-yq, but PATH contains golang-yq" >&2
+        echo "Please install python-yq or use the included nix shell" >&2
+        exit 1
+    fi
 
 [no-cd]
 test $testpath *FLAGS:
