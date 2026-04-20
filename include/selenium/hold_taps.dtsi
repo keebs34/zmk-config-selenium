@@ -338,7 +338,7 @@
     };
 
     // Fancy behaviors for one-handed Alt(+Shift)+{tab,backtick}
-    mhsc: space_cade_with_held_mods {
+    mhsc: space_cadet_with_held_mods {
       compatible = "zmk,behavior-mod-hold";
       #binding-cells = <2>;
       binding = <&sc>;
