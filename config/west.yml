@@ -13,7 +13,7 @@ manifest:
       import: app/west.yml
     - name: zmk-keyboard-quacken
       remote: NuclearSquid
-      revision: main
+      revision: aekeynox_module
     - name: zmk-config-totem
       remote: keebs34
       revision: main
