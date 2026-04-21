@@ -14,7 +14,7 @@ manifest:
     - name: zmk-keyboard-quacken
       remote: NuclearSquid
       revision: aekeynox_module
-    - name: zmk-config-totem
+    - name: zmk-keyboard-totem
       remote: keebs34
       revision: main
   self:
